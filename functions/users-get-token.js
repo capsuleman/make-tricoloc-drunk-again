@@ -28,9 +28,7 @@ exports.handler = async (event, context) => {
     const credentials = Buffer.from(encodedCredentials, 'base64').toString();
     const [username, password] = credentials.split(':');
 
-    const response = await client.query(
-      q.Get(q.Match(q.Index('users_by_username'), username))
-    );
+    const response = await client.query(q.Get(q.Match(q.Index('users_by_username'), username)));
     const hashedPassword = response.data.password;
 
     const isMatch = await bcrypt.compare(password, hashedPassword);
@@ -48,6 +46,9 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 200,
       body: JSON.stringify({ token }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     };
   } catch (error) {
     if (error.message === 'instance not found') {
