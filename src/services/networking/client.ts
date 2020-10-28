@@ -63,6 +63,22 @@ class Client {
   logout() {
     this.updateToken('');
   }
+
+  async register(
+    username: string,
+    password: string,
+    firstname: string,
+    lastname: string,
+    isNikingMarine: boolean,
+  ) {
+    return this.post('.netlify/functions/users-create', {
+      username,
+      password,
+      firstname,
+      lastname,
+      isNikingMarine,
+    });
+  }
 }
 
 const client = new Client();

@@ -20,9 +20,7 @@ exports.handler = async (event, context) => {
     const userItem = {
       data: { username, password: await bcrypt.hash(password, saltRounds) },
     };
-    await client.query(
-      q.Create(q.Collection('users'), userItem)
-    );
+    await client.query(q.Create(q.Collection('users'), userItem));
 
     return {
       statusCode: 201,
