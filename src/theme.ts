@@ -1,9 +1,11 @@
 import { createMuiTheme, Theme } from '@material-ui/core';
 
 export const colors = {
-  primary: '#E27D60',
-  secondary: '#85DCBA',
-  red: '#E8A87C',
+  darkBlue: '#003049',
+  red: '#d62828',
+  orange: '#f77f00',
+  yellow: '#fcbf49',
+  darkWhite: '#eae2b7',
   white: '#fff',
   grey: '#6d7278',
 };
@@ -20,11 +22,11 @@ export const theme: Theme = createMuiTheme({
   },
   palette: {
     primary: {
-      main: colors.primary,
+      main: colors.darkBlue,
       contrastText: colors.white,
     },
     secondary: {
-      main: colors.secondary,
+      main: colors.orange,
       contrastText: colors.white,
     },
     error: {
