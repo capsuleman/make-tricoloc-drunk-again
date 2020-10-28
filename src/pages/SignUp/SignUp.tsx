@@ -3,19 +3,22 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { useHistory } from 'react-router-dom';
 
 import Copyright from 'src/components/Copyright';
+import { PATHS } from 'src/routes';
 
 import client from 'src/services/networking/client';
-import { StyledContainer, StyledAvatar, Form, SubmitButton } from './SignUp.style';
+import { StyledContainer, StyledAvatar, Form, SubmitButton, StyledLink } from './SignUp.style';
 
 const SignIn: React.FC = () => {
+  const history = useHistory();
+
   const [firstname, setFirstname] = React.useState<string>('');
   const [lastname, setLastname] = React.useState<string>('');
   const [username, setUsername] = React.useState<string>('');
@@ -118,9 +121,9 @@ const SignIn: React.FC = () => {
         </SubmitButton>
         <Grid container justify="flex-end">
           <Grid item>
-            <Link href="#" variant="body2">
+            <StyledLink onClick={() => history.push(PATHS.SIGNIN)} variant="body2">
               Déjà un compte&nbsp;? Connexion
-            </Link>
+            </StyledLink>
           </Grid>
         </Grid>
       </Form>

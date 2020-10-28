@@ -3,18 +3,21 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { useHistory } from 'react-router-dom';
 
 import client from 'src/services/networking/client';
-import { StyledContainer, StyledAvatar, Form, SubmitButton } from './SignIn.style';
+import { StyledContainer, StyledAvatar, Form, SubmitButton, StyledLink } from './SignIn.style';
 import Copyright from 'src/components/Copyright';
+import { PATHS } from 'src/routes';
 
 const SignIn: React.FC = () => {
+  const history = useHistory();
+
   const [username, setUsername] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');
   const [isUsernameWrong, setIsUsernameWrong] = React.useState<boolean>(false);
@@ -91,14 +94,12 @@ const SignIn: React.FC = () => {
         </SubmitButton>
         <Grid container>
           <Grid item xs>
-            <Link href="#" variant="body2">
-              Mot de passe oublié&nbsp;?
-            </Link>
+            <StyledLink variant="body2">Mot de passe oublié&nbsp;?</StyledLink>
           </Grid>
           <Grid item>
-            <Link href="#" variant="body2">
+            <StyledLink variant="body2" onClick={() => history.push(PATHS.SIGNUP)}>
               Créer un compte
-            </Link>
+            </StyledLink>
           </Grid>
         </Grid>
       </Form>
