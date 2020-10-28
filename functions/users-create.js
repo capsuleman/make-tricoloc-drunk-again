@@ -16,9 +16,15 @@ exports.handler = async (event, context) => {
       };
     }
 
-    const { username, password } = JSON.parse(event.body);
+    const { username, password, firstname, lastname, isNikingMarine } = JSON.parse(event.body);
     const userItem = {
-      data: { username, password: await bcrypt.hash(password, saltRounds) },
+      data: {
+        username,
+        password: await bcrypt.hash(password, saltRounds),
+        firstname,
+        lastname,
+        isNikingMarine,
+      },
     };
     await client.query(q.Create(q.Collection('users'), userItem));
 

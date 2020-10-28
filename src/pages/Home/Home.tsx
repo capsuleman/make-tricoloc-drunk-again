@@ -7,6 +7,9 @@ import { PATHS } from 'src/routes';
 
 interface Me {
   username: string;
+  firstname: string;
+  lastname: string;
+  isNikingMarine: boolean;
 }
 
 const Home: React.FC = () => {
@@ -23,7 +26,13 @@ const Home: React.FC = () => {
     // .catch((err) => history.push('logout'));
   }, [history]);
 
-  return <>Hello {me?.username}</>;
+  return (
+    <>
+      Hello {me?.firstname} {me?.lastname} ({me?.username})<br />
+      {me && me.isNikingMarine && 'You are niking Marine. :-)'}
+      {me && !me.isNikingMarine && 'You are not niking Marine. :-('}
+    </>
+  );
 };
 
 export default Home;
