@@ -1,4 +1,9 @@
 import request from 'superagent';
+import jwt_decode from 'jwt-decode';
+
+interface AccessToken {
+  exp: number;
+}
 
 type Method = 'get' | 'post' | 'put' | 'patch' | 'delete';
 
@@ -47,6 +52,18 @@ class Client {
     return this.request('put', endpoint, data);
   }
 
+  isLogged() {
+    const token = this.getToken();
+    if (!token) return false;
+
+    const parsedToken = jwt_decode<AccessToken>(token);
+    if (!parsedToken.exp) return false;
+
+    // Less than 10 seconds remaining => token has expired
+    const now = new Date().getTime() / 1000;
+    return parsedToken.exp - now >= 10;
+  }
+
   async login(username: string, password: string) {
     const base64Creds = Buffer.from(`${username}:${password}`).toString('base64');
     const result = await this.agent
@@ -64,7 +81,7 @@ class Client {
     this.updateToken('');
   }
 
-  async register(
+  register(
     username: string,
     password: string,
     firstname: string,
@@ -78,6 +95,10 @@ class Client {
       lastname,
       isNikingMarine,
     });
+  }
+
+  me() {
+    return this.get('.netlify/functions/users-me');
   }
 }
 

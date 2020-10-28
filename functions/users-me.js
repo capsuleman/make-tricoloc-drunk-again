@@ -21,15 +21,18 @@ exports.handler = async (event, context) => {
     const username = tokenToUsername(token);
 
     if (!username) {
-        return {
-          statusCode: 401,
-          body: 'Wrong or expired JWT',
-        };
-      }
-  
+      return {
+        statusCode: 401,
+        body: 'Wrong or expired JWT',
+      };
+    }
+
     return {
       statusCode: 200,
       body: JSON.stringify({ username }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     };
   } catch (error) {
     return {

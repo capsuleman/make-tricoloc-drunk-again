@@ -16,7 +16,7 @@ import { PATHS } from 'src/routes';
 import client from 'src/services/networking/client';
 import { StyledContainer, StyledAvatar, Form, SubmitButton, StyledLink } from './SignUp.style';
 
-const SignIn: React.FC = () => {
+const SignUp: React.FC = () => {
   const history = useHistory();
 
   const [firstname, setFirstname] = React.useState<string>('');
@@ -27,12 +27,19 @@ const SignIn: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isUsernameTaken, setIsUsernameTaken] = React.useState<boolean>(false);
 
+  React.useEffect(() => {
+    if (client.isLogged()) {
+      history.push(PATHS.HOME);
+    }
+  }, [history]);
+
   const handleSubmitClick = async () => {
     setIsLoading(true);
     try {
       await client.register(username, password, firstname, lastname, isNikingMarine);
+      await client.login(username, password);
+      history.push(PATHS.HOME);
     } catch (err) {
-      console.log(err.message);
       if (err.message === 'Conflict') {
         setIsUsernameTaken(true);
       }
@@ -134,4 +141,4 @@ const SignIn: React.FC = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

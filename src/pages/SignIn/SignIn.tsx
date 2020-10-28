@@ -24,10 +24,17 @@ const SignIn: React.FC = () => {
   const [isPasswordWrong, setIsPasswordWrong] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
+  React.useEffect(() => {
+    if (client.isLogged()) {
+      history.push(PATHS.HOME);
+    }
+  }, [history]);
+
   const handleSubmitClick = async () => {
     setIsLoading(true);
     try {
       await client.login(username, password);
+      history.push(PATHS.HOME);
     } catch (err) {
       if (err.message === 'Not Found') {
         setIsUsernameWrong(true);
