@@ -1,36 +1,40 @@
 import React from 'react';
 
-import { useHistory } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 
-import client from 'src/services/networking/client';
-import { PATHS } from 'src/routes';
-
-interface Me {
-  username: string;
-  firstname: string;
-  lastname: string;
-  isNikingMarine: boolean;
-}
+import Header from 'src/components/Header';
+import Copyright from 'src/components/Copyright';
+import {
+  BarSpacer,
+  StyledContainer as Container,
+  StyledPaper as Paper,
+  FixedHeightdPaper,
+} from './Home.style';
 
 const Home: React.FC = () => {
-  const history = useHistory();
-
-  const [me, setMe] = React.useState<Me>();
-
-  React.useEffect(() => {
-    if (!client.isLogged()) {
-      history.push(PATHS.SIGNIN);
-      return;
-    }
-    client.me().then((me) => setMe(me));
-    // .catch((err) => history.push('logout'));
-  }, [history]);
-
   return (
     <>
-      Hello {me?.firstname} {me?.lastname} ({me?.username})<br />
-      {me && me.isNikingMarine && 'You are niking Marine. :-)'}
-      {me && !me.isNikingMarine && 'You are not niking Marine. :-('}
+      <Header />
+      <div>
+        <BarSpacer />
+        <Container maxWidth="lg">
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={8} lg={9}>
+              <FixedHeightdPaper>Soon a nice chart to display ratings.</FixedHeightdPaper>
+            </Grid>
+            <Grid item xs={12} md={4} lg={3}>
+              <FixedHeightdPaper>Bet here</FixedHeightdPaper>
+            </Grid>
+            <Grid item xs={12}>
+              <Paper>List of last bets.</Paper>
+            </Grid>
+          </Grid>
+          <Box pt={4}>
+            <Copyright />
+          </Box>
+        </Container>
+      </div>
     </>
   );
 };
