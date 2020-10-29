@@ -52,7 +52,7 @@
     "@types/jwt-decode": "^2.2.1",
     "@types/react-dom": "^16.9.9",
     "@types/react-router-dom": "^5.1.6",
-    "@types/styled-components": "^4.1.5",
+    "@types/styled-components": "^5.1.4",
     "@types/superagent": "^4.1.10",
     "eslint-config-prettier": "4.1.0",
     "eslint-config-react-app": "^5.0.0",
