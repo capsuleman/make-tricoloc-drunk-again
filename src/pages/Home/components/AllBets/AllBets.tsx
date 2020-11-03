@@ -56,9 +56,7 @@ const AllBets: React.FC<IProps> = ({ numberOfSessionBets }) => {
                 <TableCell>{bet.optionName}</TableCell>
                 <TableCell>{bet.numberOfShotBet} shots</TableCell>
                 <TableCell>{Math.round(bet.numberOfShotIfWin * 10) / 10} shots</TableCell>
-                <TableCell>
-                  {new Date(bet.time / 1000).toISOString().substring(0, 19).split('T').join(' at ')}
-                </TableCell>
+                <TableCell>{new Date(bet.time / 1000).toLocaleString()}</TableCell>
               </TableRow>
             ))}
           </TableBody>
