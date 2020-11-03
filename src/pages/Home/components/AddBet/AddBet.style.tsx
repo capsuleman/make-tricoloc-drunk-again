@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 
 export const Container = styled(Paper)`
   padding: 16px;
-  height: 240px;
+  height: 300px;
   display: flex;
   flex-direction: column;
 `;

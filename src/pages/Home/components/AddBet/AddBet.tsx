@@ -44,6 +44,13 @@ const AddBet: React.FC<IProps> = ({ onChange }) => {
     .map(({ numberOfBets }) => numberOfBets)
     .reduce((prev, current) => prev + current, 0);
 
+  const choosenOption = options.find((option) => option.id === optionId);
+  const newOdd = choosenOption
+    ? (sumOfNumberOfBets + Number(numberOfShots)) /
+      (choosenOption.numberOfBets + Number(numberOfShots))
+    : 0;
+  const numberOfShotIfWins = Math.round(10 * newOdd * Number(numberOfShots)) / 10;
+
   return (
     <Container>
       <Title>Add a bet</Title>
@@ -80,6 +87,16 @@ const AddBet: React.FC<IProps> = ({ onChange }) => {
             InputProps={{ inputProps: { min: 0 } }}
             value={numberOfShots}
             onChange={(e) => setNumberOfShots(e.target.value)}
+            fullWidth
+          />
+        </InputContainer>
+        <InputContainer>
+          <TextField
+            id="value"
+            label="Estimated number of shot if win"
+            value={numberOfShotIfWins}
+            disabled
+            fullWidth
           />
         </InputContainer>
         <AddBetButton
