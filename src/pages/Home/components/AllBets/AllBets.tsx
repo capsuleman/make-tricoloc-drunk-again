@@ -17,7 +17,8 @@ interface Bet {
   firstname: string;
   lastname: string;
   optionName: string;
-  value: number;
+  numberOfShotBet: number;
+  numberOfShotIfWin: number;
   time: number;
 }
 
@@ -40,8 +41,10 @@ const AllBets: React.FC<IProps> = ({ numberOfSessionBets }) => {
           <TableHead>
             <TableRow>
               <TableCell>Bettor</TableCell>
-              <TableCell align="right">Option</TableCell>
-              <TableCell align="right">Number of shots</TableCell>
+              <TableCell>Option</TableCell>
+              <TableCell>Number of shot to pay</TableCell>
+              <TableCell>Number of shot to give if win</TableCell>
+              <TableCell>Date</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -50,8 +53,12 @@ const AllBets: React.FC<IProps> = ({ numberOfSessionBets }) => {
                 <TableCell component="th" scope="row">
                   {bet.firstname} {bet.lastname} ({bet.username})
                 </TableCell>
-                <TableCell align="right">{bet.optionName}</TableCell>
-                <TableCell align="right">{bet.value} shots</TableCell>
+                <TableCell>{bet.optionName}</TableCell>
+                <TableCell>{bet.numberOfShotBet} shots</TableCell>
+                <TableCell>{Math.round(bet.numberOfShotIfWin * 10) / 10} shots</TableCell>
+                <TableCell>
+                  {new Date(bet.time / 1000).toISOString().substring(0, 19).split('T').join(' at ')}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

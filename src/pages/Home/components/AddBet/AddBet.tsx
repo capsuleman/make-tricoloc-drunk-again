@@ -14,6 +14,7 @@ import { Container, Title, InputContainer, AddBetButton, FormContainer } from '.
 interface Option {
   id: string;
   name: string;
+  numberOfBets: number;
 }
 
 interface IProps {
@@ -39,6 +40,10 @@ const AddBet: React.FC<IProps> = ({ onChange }) => {
     onChange();
   };
 
+  const sumOfNumberOfBets = options
+    .map(({ numberOfBets }) => numberOfBets)
+    .reduce((prev, current) => prev + current, 0);
+
   return (
     <Container>
       <Title>Add a bet</Title>
@@ -56,7 +61,12 @@ const AddBet: React.FC<IProps> = ({ onChange }) => {
               </MenuItem>
               {options.map((option) => (
                 <MenuItem key={option.id} value={option.id}>
-                  {option.name}
+                  {option.name} (
+                  {Math.round(
+                    (10 * (sumOfNumberOfBets + Number(numberOfShots))) /
+                      (option.numberOfBets + Number(numberOfShots)),
+                  ) / 10}
+                  )
                 </MenuItem>
               ))}
             </Select>
@@ -77,7 +87,7 @@ const AddBet: React.FC<IProps> = ({ onChange }) => {
           color="secondary"
           endIcon={isLoading && <CircularProgress color="primary" size={20} />}
           onClick={handleBet}
-          disabled={!optionId || !numberOfShots}
+          disabled={!(optionId && numberOfShots && Number(numberOfShots) > 0)}
         >
           Bet!
         </AddBetButton>
