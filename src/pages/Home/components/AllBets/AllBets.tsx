@@ -21,12 +21,16 @@ interface Bet {
   time: number;
 }
 
-const AllBets: React.FC = () => {
+interface IProps {
+  numberOfSessionBets: number;
+}
+
+const AllBets: React.FC<IProps> = ({ numberOfSessionBets }) => {
   const [bets, setBets] = React.useState<Bet[]>([]);
 
   React.useEffect(() => {
     client.getAllBets().then((bets) => setBets(bets));
-  }, []);
+  }, [numberOfSessionBets]);
 
   return (
     <Container>

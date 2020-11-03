@@ -10,6 +10,8 @@ import AllBets from './components/AllBets';
 import { BarSpacer, StyledContainer as Container, FixedHeightdPaper } from './Home.style';
 
 const Home: React.FC = () => {
+  const [numberOfSessionBets, setNumberOfSessionBets] = React.useState<number>(0);
+
   return (
     <>
       <Header />
@@ -21,10 +23,10 @@ const Home: React.FC = () => {
               <FixedHeightdPaper>Soon a nice chart to display ratings.</FixedHeightdPaper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
-              <AddBet />
+              <AddBet onChange={() => setNumberOfSessionBets(numberOfSessionBets + 1)} />
             </Grid>
             <Grid item xs={12}>
-              <AllBets />
+              <AllBets numberOfSessionBets={numberOfSessionBets} />
             </Grid>
           </Grid>
           <Box pt={4}>

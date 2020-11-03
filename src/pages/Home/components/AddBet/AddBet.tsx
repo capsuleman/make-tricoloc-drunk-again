@@ -16,7 +16,11 @@ interface Option {
   name: string;
 }
 
-const AddBet: React.FC = () => {
+interface IProps {
+  onChange: () => void;
+}
+
+const AddBet: React.FC<IProps> = ({ onChange }) => {
   const [options, setOptions] = React.useState<Option[]>([]);
   const [optionId, setOptionId] = React.useState<string>('');
   const [numberOfShots, setNumberOfShots] = React.useState<string>('');
@@ -32,6 +36,7 @@ const AddBet: React.FC = () => {
     setIsLoading(false);
     setOptionId('');
     setNumberOfShots('');
+    onChange();
   };
 
   return (
