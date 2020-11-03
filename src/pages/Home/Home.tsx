@@ -5,14 +5,13 @@ import Box from '@material-ui/core/Box';
 
 import Header from 'src/components/Header';
 import Copyright from 'src/components/Copyright';
-import {
-  BarSpacer,
-  StyledContainer as Container,
-  StyledPaper as Paper,
-  FixedHeightdPaper,
-} from './Home.style';
+import AddBet from './components/AddBet';
+import AllBets from './components/AllBets';
+import { BarSpacer, StyledContainer as Container, FixedHeightdPaper } from './Home.style';
 
 const Home: React.FC = () => {
+  const [numberOfSessionBets, setNumberOfSessionBets] = React.useState<number>(0);
+
   return (
     <>
       <Header />
@@ -24,10 +23,10 @@ const Home: React.FC = () => {
               <FixedHeightdPaper>Soon a nice chart to display ratings.</FixedHeightdPaper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
-              <FixedHeightdPaper>Bet here</FixedHeightdPaper>
+              <AddBet onChange={() => setNumberOfSessionBets(numberOfSessionBets + 1)} />
             </Grid>
             <Grid item xs={12}>
-              <Paper>List of last bets.</Paper>
+              <AllBets numberOfSessionBets={numberOfSessionBets} />
             </Grid>
           </Grid>
           <Box pt={4}>

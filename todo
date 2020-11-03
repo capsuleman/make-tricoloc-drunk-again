@@ -1,0 +1,4 @@
+[ ] Seperate dev database and prod database
+[ ] Use user ref and not username
+[ ] Add constraint on login fields
+[ ] Create section (REST API)

@@ -100,6 +100,18 @@ class Client {
   me() {
     return this.get('.netlify/functions/users-me');
   }
+
+  getOptions() {
+    return this.get('.netlify/functions/options-get-all');
+  }
+
+  addBet(value: number, option: string) {
+    return this.post('.netlify/functions/bets-create', { value, option });
+  }
+
+  getAllBets() {
+    return this.get('.netlify/functions/bets-get-all');
+  }
 }
 
 const client = new Client();
