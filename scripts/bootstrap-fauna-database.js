@@ -94,6 +94,15 @@ async function createFaunaDB(key) {
       q.CreateIndex({
         name: 'all_bets',
         source: q.Collection('bets'),
+        values: [
+          {
+            field: ['ts'],
+            reverse: true,
+          },
+          {
+            field: ['ref'],
+          },
+        ],
       }),
     );
     await client.query(
