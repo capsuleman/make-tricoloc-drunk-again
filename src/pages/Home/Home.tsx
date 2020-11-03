@@ -6,12 +6,8 @@ import Box from '@material-ui/core/Box';
 import Header from 'src/components/Header';
 import Copyright from 'src/components/Copyright';
 import AddBet from './components/AddBet';
-import {
-  BarSpacer,
-  StyledContainer as Container,
-  StyledPaper as Paper,
-  FixedHeightdPaper,
-} from './Home.style';
+import AllBets from './components/AllBets';
+import { BarSpacer, StyledContainer as Container, FixedHeightdPaper } from './Home.style';
 
 const Home: React.FC = () => {
   return (
@@ -28,7 +24,7 @@ const Home: React.FC = () => {
               <AddBet />
             </Grid>
             <Grid item xs={12}>
-              <Paper>List of last bets.</Paper>
+              <AllBets />
             </Grid>
           </Grid>
           <Box pt={4}>

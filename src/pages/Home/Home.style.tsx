@@ -10,7 +10,7 @@ export const StyledContainer = styled(Container)`
   padding: 32px;
 `;
 
-export const StyledPaper = styled(Paper)`
+const StyledPaper = styled(Paper)`
   padding: 16px;
   display: flex;
   overflow: auto;

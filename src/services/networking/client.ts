@@ -108,6 +108,10 @@ class Client {
   addBet(value: number, option: string) {
     return this.post('.netlify/functions/bets-create', { value, option });
   }
+
+  getAllBets() {
+    return this.get('.netlify/functions/bets-get-all');
+  }
 }
 
 const client = new Client();
