@@ -77,7 +77,7 @@ const AddBet: React.FC<IProps> = ({ onChange }) => {
           color="secondary"
           endIcon={isLoading && <CircularProgress color="primary" size={20} />}
           onClick={handleBet}
-          disabled={!optionId || !numberOfShots}
+          disabled={!(optionId && numberOfShots && Number(numberOfShots) > 0)}
         >
           Bet!
         </AddBetButton>

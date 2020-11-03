@@ -35,6 +35,13 @@ exports.handler = async (event, context) => {
 
     const { value, option } = JSON.parse(event.body);
 
+    if (value <= 0) {
+      return {
+        statusCode: 400,
+        body: 'Value has to be strictly positive',
+      };
+    }
+
     const isOptionExist = await client.query(q.Exists(q.Ref(q.Collection('options'), option)));
 
     if (!isOptionExist) {
