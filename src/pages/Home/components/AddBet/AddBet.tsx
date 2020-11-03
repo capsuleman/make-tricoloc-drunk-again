@@ -30,6 +30,8 @@ const AddBet: React.FC = () => {
     setIsLoading(true);
     await client.addBet(Number(numberOfShots), optionId);
     setIsLoading(false);
+    setOptionId('');
+    setNumberOfShots('');
   };
 
   return (
@@ -70,6 +72,7 @@ const AddBet: React.FC = () => {
           color="secondary"
           endIcon={isLoading && <CircularProgress color="primary" size={20} />}
           onClick={handleBet}
+          disabled={!optionId || !numberOfShots}
         >
           Bet!
         </AddBetButton>
