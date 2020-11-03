@@ -18,5 +18,5 @@ const StyledPaper = styled(Paper)`
 `;
 
 export const FixedHeightdPaper = styled(StyledPaper)`
-  height: 240px;
+  height: 300px;
 `;
