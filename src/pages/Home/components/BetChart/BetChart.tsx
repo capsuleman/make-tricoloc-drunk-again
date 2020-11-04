@@ -43,6 +43,7 @@ const BetChart: React.FC = () => {
       });
     return dataAtTime;
   });
+  data.push({ time: new Date().getTime() * 1000, ...lastValue });
 
   const lineColors = [colors.orange, colors.darkBlue, colors.red, colors.grey];
 
@@ -61,8 +62,10 @@ const BetChart: React.FC = () => {
         >
           <XAxis
             dataKey="time"
+            domain={['dataMin', new Date().getTime()]}
             stroke={theme.palette.text.primary}
             tickFormatter={(time) => new Date(time / 1000).toLocaleString()}
+            type="number"
           />
           <YAxis stroke={theme.palette.text.primary}>
             <Label
@@ -77,7 +80,7 @@ const BetChart: React.FC = () => {
           {options.map((option, index) => {
             return (
               <Line
-                type="monotone"
+                type="stepAfter"
                 dataKey={option.id}
                 stroke={lineColors[index]}
                 dot={false}
