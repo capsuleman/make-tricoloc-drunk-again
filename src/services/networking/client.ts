@@ -112,6 +112,10 @@ class Client {
   getAllBets() {
     return this.get('.netlify/functions/bets-get-all');
   }
+
+  getChartBetData() {
+    return this.get('.netlify/functions/bets-get-chart-data');
+  }
 }
 
 const client = new Client();
