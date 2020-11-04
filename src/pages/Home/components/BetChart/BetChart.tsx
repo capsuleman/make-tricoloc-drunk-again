@@ -12,6 +12,25 @@ interface ChartDatum {
   data: { time: number; cumulatedValue: number }[];
 }
 
+interface CustomizedAxisTickProps {
+  x: number;
+  y: number;
+  payload: { value: number };
+}
+
+const CustomizedAxisTick: React.FC<CustomizedAxisTickProps> = ({ x, y, payload }) => (
+  <g transform={`translate(${x},${y})`}>
+    <text x={0} y={0} dy={16} fill="#666">
+      <tspan textAnchor="middle" x="0">
+        {new Date(payload.value / 1000).toLocaleDateString()}
+      </tspan>
+      <tspan textAnchor="middle" x="0" dy="20">
+        {new Date(payload.value / 1000).toLocaleTimeString()}
+      </tspan>
+    </text>
+  </g>
+);
+
 const BetChart: React.FC = () => {
   const theme = useTheme();
   const [chartData, setChartData] = React.useState<ChartDatum[]>([]);
@@ -56,7 +75,7 @@ const BetChart: React.FC = () => {
           margin={{
             top: 16,
             right: 16,
-            bottom: 0,
+            bottom: 16,
             left: 24,
           }}
         >
@@ -64,7 +83,7 @@ const BetChart: React.FC = () => {
             dataKey="time"
             domain={['dataMin', new Date().getTime()]}
             stroke={theme.palette.text.primary}
-            tickFormatter={(time) => new Date(time / 1000).toLocaleString()}
+            tick={CustomizedAxisTick}
             type="number"
           />
           <YAxis stroke={theme.palette.text.primary}>
